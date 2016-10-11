@@ -1,16 +1,12 @@
 <?php 
-
  session_start();
-
 $db = mysqli_connect("localhost", "root", "", "bang_form");
-
 if (isset($_POST['register_btn'])) {
 	  // session_start();
-	$username 	= mysql_real_escape_string($_POST['username']);
-	$email 		= mysql_real_escape_string($_POST['email']);
-	$password 	= mysql_real_escape_string($_POST['password']);
-	$password2 	= mysql_real_escape_string($_POST['password2']);
-
+	$username 	= $_POST['username'];
+	$email 		= $_POST['email'];
+	$password 	= $_POST['password'];
+	$password2 	= $_POST['password2'];
 	if ($password == $password2) {
 		$password = md5($password);
 		$sql = "INSERT INTO users(username, email, password) VALUES('$username', '$email', '$password')";
@@ -18,12 +14,10 @@ if (isset($_POST['register_btn'])) {
 		$_SESSION['message'] = "You are now logged in";
 		$_SESSION['username'] = $username;
 		header("location: register.php");
-
 	}else{
-		$_SESSION['message'] = "The two passwords do not match";
+		 echo "The two passwords do not match";
 	}
 }
-
  ?>
 
 
@@ -59,3 +53,5 @@ if (isset($_POST['register_btn'])) {
 	</form>
 </body>
 </html>
+
+
